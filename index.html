@@ -17,18 +17,25 @@
     font-family: Arial, sans-serif;
     background: black;
     color: grey;
-    text-align: center; 
+    
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+
+    
     padding: 0 20px; 
     font-family: 'Orbitron',sans-serif;
+            display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
         .glow-heading {
             font-size: 28px;
             color: limegreen;
             font-weight: 800;
-            margin: 20px 0 10px;
+            margin: 20px 0 10px; 
+            text-align: center;
+    margin: auto;
         }
 
         .faltusmplogo {
@@ -40,7 +47,8 @@
 
         .copyBtn {
             position: relative;
-            display: flex;
+            display: block;
+    margin: 20px auto;
             align-items: center;
             padding: 10px 20px;
             font-size: 16px;
@@ -54,7 +62,8 @@
         }
         .copyBtn2 {
             position: relative;
-            display: flex;
+            display: block;
+    margin: 20px auto;
             align-items: center;
             padding: 10px 20px;
             font-size: 16px;
@@ -256,9 +265,12 @@
             padding: 20px;
             margin-top: 10px;
             animation: fadeIn 0.5s ease-in-out;
-            width: 330px;
+            
 text-align: center; 
             border-radius: 15px;
+            width: 60%;
+    max-width: 900px; /* Adjust based on your preference */
+    margin: auto;
         }
 
         .tab-content.active {
@@ -386,8 +398,10 @@ p {
             padding: 20px;
         }
         .container {
-            max-width: 280px;
-            margin: auto;
+            max-width: 800px;
+    width: 80%;
+    margin: auto;
+        
             background-color: #222;
             padding: 20px;
             border-radius: 10px;
@@ -545,6 +559,8 @@ iframe {
         .glow-heading1 {
     font-size: 28px;
     color: #fcf800;
+            text-align: center;
+    margin: auto;
     position: center;
     font-family: 'Orbitron',sans-serif;
     font-weight: 800;
