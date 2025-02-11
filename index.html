@@ -1250,17 +1250,23 @@ s0.parentNode.insertBefore(s1,s0);
 <!--End of Tawk.to Script-->
         
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
     const problemInput = document.getElementById("problem");
     const fileInput = document.getElementById("fileUploadproblem");
     const fileNameDisplay = document.getElementById("fileNameDisplay");
     const submitButton = document.getElementById("submitProblem");
 
+    // Ensure elements exist before adding event listeners
+    if (!problemInput || !fileInput || !fileNameDisplay || !submitButton) {
+        console.error("One or more required elements are missing.");
+        return;
+    }
+
     submitButton.addEventListener("click", function () {
         const webhookURL = "https://discord.com/api/webhooks/1338512343822237716/7Grxxk4j2IndDRoXIAkOF8br-nH-Ck-d8DTcGpwyLb5iVoWeF0iiCC7iTI3naLX9LAUN";
         
-        let problemText = problemInput.value.trim(); // Trim to remove unnecessary spaces
-        const file = fileInput.files[0];
+        const problemText = problemInput.value ? problemInput.value.trim() : ""; // Check if problemInput exists
+        const file = fileInput.files.length > 0 ? fileInput.files[0] : null;
 
         const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
@@ -1272,7 +1278,7 @@ s0.parentNode.insertBefore(s1,s0);
         };
 
         const payload = {
-            content: problemText ? "" : "No problem description provided.", // Ensures a non-empty message
+            content: problemText || "No problem description provided.", // Ensures a non-empty message
             embeds: [embed] // Fix: Wrapping embed inside an array
         };
 
@@ -1330,7 +1336,7 @@ s0.parentNode.insertBefore(s1,s0);
         fileNameDisplay.textContent = this.files.length > 0 ? this.files[0].name : "No file selected";
     });
 });
-    
+  
 </script>
 </body>
 </html>
