@@ -1250,13 +1250,19 @@ s0.parentNode.insertBefore(s1,s0);
 <!--End of Tawk.to Script-->
         
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+   document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("submitProblem").addEventListener("click", function () {
         const webhookURL = "https://discord.com/api/webhooks/1338512343822237716/7Grxxk4j2IndDRoXIAkOF8br-nH-Ck-d8DTcGpwyLb5iVoWeF0iiCC7iTI3naLX9LAUN";
         
-        let problemText = document.getElementById("problem").value;
+        let problemText = document.getElementById("problem").value.trim();
         const fileInput = document.querySelector("#fileUploadproblem");
         const file = fileInput.files[0];
+
+        // Ensure the problem is not empty
+        if (!problemText && !file) {
+            alert("Please enter a problem or upload a file.");
+            return;
+        }
 
         // Generate a random color
         const randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -1264,11 +1270,9 @@ s0.parentNode.insertBefore(s1,s0);
         const payload = {
             embeds: [
                 {
-                    title: "New Problem report",
+                    title: "New Problem Report",
                     color: parseInt(randomColor, 16),
-                    fields: [
-                        { name: "PROBLEM", value: problemText, inline: false }
-                    ],
+                    fields: problemText ? [{ name: "PROBLEM", value: problemText, inline: false }] : [],
                     footer: { text: "Submitted via Problem Form" }
                 }
             ]
@@ -1282,21 +1286,18 @@ s0.parentNode.insertBefore(s1,s0);
 
             fetch(webhookURL, {
                 method: "POST",
-                body: formData // No need for headers; fetch handles FormData automatically
+                body: formData
             })
-            .then(response => {
-                if (response.ok) {
-                    alert("Problem submitted successfully!");
-                    
-                    fileInput.value = ""; // Clear file input
-                    document.getElementById("fileNameDisplay").textContent = "No file selected";
-                } else {
-                    alert("Failed to send problem.");
-                }
+            .then(response => response.ok ? response.text() : Promise.reject(response.text()))
+            .then(() => {
+                alert("Problem submitted successfully!");
+                document.getElementById("problem").value = ""; // Clear problem input
+                fileInput.value = ""; // Clear file input
+                document.getElementById("fileNameDisplay").textContent = "No file selected";
             })
             .catch(error => {
-                console.error("Error:", error);
-                alert("An error occurred.");
+                console.error("Error submitting problem:", error);
+                alert("Failed to send problem.");
             });
 
         } else {
@@ -1306,27 +1307,24 @@ s0.parentNode.insertBefore(s1,s0);
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             })
-            .then(response => {
-                if (response.ok) {
-                    alert("Problem submitted successfully!");
-                    document.getElementById("problem").value = ""; // Clear problem input
-                } else {
-                    alert("Failed to send problem.");
-                }
+            .then(response => response.ok ? response.text() : Promise.reject(response.text()))
+            .then(() => {
+                alert("Problem submitted successfully!");
+                document.getElementById("problem").value = ""; // Clear problem input
             })
             .catch(error => {
-                console.error("Error:", error);
-                alert("An error occurred.");
+                console.error("Error submitting problem:", error);
+                alert("Failed to send problem.");
             });
         }
     });
 
     // Display selected file name
     document.getElementById("fileUploadproblem").addEventListener("change", function () {
-        const fileNameDisplay = document.getElementById("fileNameDisplay");
-        fileNameDisplay.textContent = this.files.length > 0 ? this.files[0].name : "No file selected";
+        document.getElementById("fileNameDisplay").textContent = this.files.length > 0 ? this.files[0].name : "No file selected";
     });
 });
+
 </script>
 </body>
 </html>
