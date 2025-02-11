@@ -1252,14 +1252,11 @@ s0.parentNode.insertBefore(s1,s0);
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("submitProblem").addEventListener("click", function () {
-        
         const webhookURL = "https://discord.com/api/webhooks/1338512343822237716/7Grxxk4j2IndDRoXIAkOF8br-nH-Ck-d8DTcGpwyLb5iVoWeF0iiCC7iTI3naLX9LAUN";
-       let problemText = document.getElementById("problem").value;
-        const file = fileInput?.files[0];
-    const fileInput = document.querySelector("#fileUploadproblem");
         
-
-        
+        let problemText = document.getElementById("problem").value;
+        const fileInput = document.querySelector("#fileUploadproblem");
+        const file = fileInput.files[0];
 
         // Generate a random color
         const randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -1270,37 +1267,66 @@ s0.parentNode.insertBefore(s1,s0);
                     title: "New Suggestion",
                     color: parseInt(randomColor, 16),
                     fields: [
-                         { name: "PROBLEM", value: problemText, inline: false }
+                        { name: "PROBLEM", value: problemText || "No problem provided", inline: false }
                     ],
                     footer: { text: "Submitted via Problem Form" }
                 }
             ]
         };
-        if (file) {
-            formData.append("file", file); // Attach the file
-        }
 
-        fetch(webhookURL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        })
-        .then(response => {
-            if (response.ok) {
-                alert("Problem submitted successfully!");
-                document.getElementById("usersuggestion").value = "";
-                selectedOption.checked = false;
-            } else {
-                alert("Failed to send problem.");
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("An error occurred.");
-        });
+        if (file) {
+            // Use FormData for file uploads
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("payload_json", JSON.stringify(payload));
+
+            fetch(webhookURL, {
+                method: "POST",
+                body: formData // No need for headers; fetch handles FormData automatically
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Problem submitted successfully!");
+                    document.getElementById("problem").value = ""; // Clear problem input
+                    fileInput.value = ""; // Clear file input
+                    document.getElementById("fileNameDisplay").textContent = "No file selected";
+                } else {
+                    alert("Failed to send problem.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred.");
+            });
+
+        } else {
+            // If no file, send JSON payload
+            fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Problem submitted successfully!");
+                    document.getElementById("problem").value = ""; // Clear problem input
+                } else {
+                    alert("Failed to send problem.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred.");
+            });
+        }
+    });
+
+    // Display selected file name
+    document.getElementById("fileUploadproblem").addEventListener("change", function () {
+        const fileNameDisplay = document.getElementById("fileNameDisplay");
+        fileNameDisplay.textContent = this.files.length > 0 ? this.files[0].name : "No file selected";
     });
 });
-
 </script>
 </body>
 </html>
