@@ -1258,7 +1258,6 @@ s0.parentNode.insertBefore(s1,s0);
         const fileInput = document.querySelector("#fileUploadproblem");
         const file = fileInput.files[0];
 
-        // Ensure the problem is not empty
         if (!problemText && !file) {
             alert("Please enter a problem or upload a file.");
             return;
@@ -1279,7 +1278,6 @@ s0.parentNode.insertBefore(s1,s0);
         };
 
         if (file) {
-            // Use FormData for file uploads
             const formData = new FormData();
             formData.append("file", file);
             formData.append("payload_json", JSON.stringify(payload));
@@ -1288,42 +1286,55 @@ s0.parentNode.insertBefore(s1,s0);
                 method: "POST",
                 body: formData
             })
-            .then(response => response.ok ? response.text() : Promise.reject(response.text()))
+            .then(async response => {
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Error Response:", errorText);
+                    throw new Error(errorText);
+                }
+                return response.text();
+            })
             .then(() => {
                 alert("Problem submitted successfully!");
-                document.getElementById("problem").value = ""; // Clear problem input
-                fileInput.value = ""; // Clear file input
+                document.getElementById("problem").value = ""; 
+                fileInput.value = ""; 
                 document.getElementById("fileNameDisplay").textContent = "No file selected";
             })
             .catch(error => {
                 console.error("Error submitting problem:", error);
-                alert("Failed to send problem.");
+                alert("Failed to send problem. Check the console for details.");
             });
 
         } else {
-            // If no file, send JSON payload
             fetch(webhookURL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             })
-            .then(response => response.ok ? response.text() : Promise.reject(response.text()))
+            .then(async response => {
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Error Response:", errorText);
+                    throw new Error(errorText);
+                }
+                return response.text();
+            })
             .then(() => {
                 alert("Problem submitted successfully!");
-                document.getElementById("problem").value = ""; // Clear problem input
+                document.getElementById("problem").value = "";
             })
             .catch(error => {
                 console.error("Error submitting problem:", error);
-                alert("Failed to send problem.");
+                alert("Failed to send problem. Check the console for details.");
             });
         }
     });
 
-    // Display selected file name
     document.getElementById("fileUploadproblem").addEventListener("change", function () {
         document.getElementById("fileNameDisplay").textContent = this.files.length > 0 ? this.files[0].name : "No file selected";
     });
 });
+
 
 </script>
 </body>
