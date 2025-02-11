@@ -1256,16 +1256,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const fileNameDisplay = document.getElementById("fileNameDisplay");
     const submitButton = document.getElementById("submitProblem");
 
-    // Ensure all elements exist before proceeding
-    
-
     submitButton.addEventListener("click", function () {
         const webhookURL = "https://discord.com/api/webhooks/1338512343822237716/7Grxxk4j2IndDRoXIAkOF8br-nH-Ck-d8DTcGpwyLb5iVoWeF0iiCC7iTI3naLX9LAUN";
         
-        let problemText = document.getElementById("problem"); 
+        let problemText = document.getElementById("problem").value.trim(); 
         const file = fileInput.files[0];
-
-        
 
         const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
@@ -1274,11 +1269,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 {
                     title: "New Problem Report",
                     color: parseInt(randomColor, 16),
-                    
-                    fields: [
-                        { name: "PROBLEM", value: problemText, inline: true }
-                        
-                    ],
+                    fields: problemText ? [{ name: "PROBLEM", value: problemText, inline: true }] : [],
                     footer: { text: "Submitted via Problem Form" }
                 }
             ]
@@ -1338,6 +1329,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fileNameDisplay.textContent = this.files.length > 0 ? this.files[0].name : "No file selected";
     });
 });
+
 
 </script>
 </body>
