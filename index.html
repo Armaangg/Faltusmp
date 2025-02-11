@@ -1247,5 +1247,59 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
+        
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("submitProblem").addEventListener("click", function () {
+        
+        const webhookURL = "https://discord.com/api/webhooks/1338512343822237716/7Grxxk4j2IndDRoXIAkOF8br-nH-Ck-d8DTcGpwyLb5iVoWeF0iiCC7iTI3naLX9LAUN";
+
+        
+
+        
+
+        // Generate a random color
+        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
+        const payload = {
+            embeds: [
+                {
+                    title: "New Suggestion",
+                    color: parseInt(randomColor, 16),
+                    fields: [
+                         { name: "PROBLEM", value: problemText, inline: false }
+                    ],
+                    footer: { text: "Submitted via Problem Form" }
+                }
+            ]
+        };
+        if (fileInput) {
+        fileInput.addEventListener("change", function () {
+            fileNameDisplay.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : "No file selected";
+        });
+        }
+
+        fetch(webhookURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Problem submitted successfully!");
+                document.getElementById("usersuggestion").value = "";
+                selectedOption.checked = false;
+            } else {
+                alert("Failed to send problem.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred.");
+        });
+    });
+});
+
+</script>
 </body>
 </html>
