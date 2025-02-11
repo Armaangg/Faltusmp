@@ -588,10 +588,29 @@ iframe {
         <button class="tab-btn" data-section="report">Report</button>
         <br>
          <button class="tab-btn" data-section="suggestions">Suggetions</button>
-         <!-- New Tab -->
+         <br>
+         <button class="tab-btn" data-section="problem">Problem</button>
+    
+        <!-- New Tab -->
     </nav>
 
     <!-- Sections -->
+    <section id="problem" class="tab-content">
+        <h2 class="glow-heading">Write your problem</h2>
+<div class="review-columns">
+    <div class="review-column">
+        <label for="problem">Write your problem</label>
+          <textarea id="problem" name="problem" rows="4" cols="40" required></textarea>
+       <br>
+        <h2 class="glow-heading">Select a file(optional)</h2>
+<br>
+        <input type="file" id="fileUploadproblem" accept="image/video">
+                <p id="fileNameDisplay">No file selected</p><br>
+
+    <br>
+         <button class="submit-button1" id="submitProblem">Submit Problem</button>
+    </div>
+</div>
     <section id="suggestions" class="tab-content">
      <h2 class="glow-heading">Select an option and suggest</h2>
 <div class="review-columns">
