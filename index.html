@@ -1274,7 +1274,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 {
                     title: "New Problem Report",
                     color: parseInt(randomColor, 16),
-                    fields: problemText ? [{ name: "PROBLEM", value: problemText, inline: false }] : [],
+                    
+                    fields: [
+                        { name: "PROBLEM", value: problemText, inline: true }
+                        
+                    ],
                     footer: { text: "Submitted via Problem Form" }
                 }
             ]
