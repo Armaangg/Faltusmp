@@ -1267,7 +1267,7 @@ s0.parentNode.insertBefore(s1,s0);
                     title: "New Problem report",
                     color: parseInt(randomColor, 16),
                     fields: [
-                        { name: "PROBLEM", value: problemText || "No problem provided", inline: false }
+                        { name: "PROBLEM", value: problemText , inline: false }
                     ],
                     footer: { text: "Submitted via Problem Form" }
                 }
@@ -1287,7 +1287,7 @@ s0.parentNode.insertBefore(s1,s0);
             .then(response => {
                 if (response.ok) {
                     alert("Problem submitted successfully!");
-                    document.getElementById("problem").value = ""; // Clear problem input
+                    
                     fileInput.value = ""; // Clear file input
                     document.getElementById("fileNameDisplay").textContent = "No file selected";
                 } else {
