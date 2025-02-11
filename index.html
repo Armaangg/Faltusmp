@@ -1250,7 +1250,7 @@ s0.parentNode.insertBefore(s1,s0);
 <!--End of Tawk.to Script-->
         
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
     const problemInput = document.getElementById("problem");
     const fileInput = document.getElementById("fileUploadproblem");
     const fileNameDisplay = document.getElementById("fileNameDisplay");
@@ -1259,7 +1259,7 @@ document.addEventListener("DOMContentLoaded", function () {
     submitButton.addEventListener("click", function () {
         const webhookURL = "https://discord.com/api/webhooks/1338512343822237716/7Grxxk4j2IndDRoXIAkOF8br-nH-Ck-d8DTcGpwyLb5iVoWeF0iiCC7iTI3naLX9LAUN";
         
-        let problemText = problemInput.value; // Fixed reference
+        let problemText = problemInput.value.trim(); // Trim to remove unnecessary spaces
         const file = fileInput.files[0];
 
         const randomColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -1271,10 +1271,15 @@ document.addEventListener("DOMContentLoaded", function () {
             footer: { text: "Submitted via Problem Form" }
         };
 
+        const payload = {
+            content: problemText ? "" : "No problem description provided.", // Ensures a non-empty message
+            embeds: [embed] // Fix: Wrapping embed inside an array
+        };
+
         if (file) {
             const formData = new FormData();
             formData.append("file", file);
-            formData.append("payload_json", JSON.stringify(embed)); // Fixed `payload` reference
+            formData.append("payload_json", JSON.stringify(payload));
 
             fetch(webhookURL, { method: "POST", body: formData })
             .then(async response => {
@@ -1300,7 +1305,7 @@ document.addEventListener("DOMContentLoaded", function () {
             fetch(webhookURL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(embed) // Fixed `payload` reference
+                body: JSON.stringify(payload) // Corrected payload
             })
             .then(async response => {
                 if (!response.ok) {
@@ -1322,12 +1327,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     fileInput.addEventListener("change", function () {
-        fileNameDisplay.textContent = this.files.length > 0 ? this.files[0].name : "No file selected"; // Fixed typo
+        fileNameDisplay.textContent = this.files.length > 0 ? this.files[0].name : "No file selected";
     });
 });
-
-
-
+    
 </script>
 </body>
 </html>
