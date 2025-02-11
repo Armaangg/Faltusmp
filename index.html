@@ -1250,12 +1250,22 @@ s0.parentNode.insertBefore(s1,s0);
 <!--End of Tawk.to Script-->
         
 <script>
-   document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("submitProblem").addEventListener("click", function () {
+document.addEventListener("DOMContentLoaded", function () {
+    const problemInput = document.getElementById("problem");
+    const fileInput = document.getElementById("fileUploadproblem");
+    const fileNameDisplay = document.getElementById("fileNameDisplay");
+    const submitButton = document.getElementById("submitProblem");
+
+    // Ensure all elements exist before proceeding
+    if (!problemInput || !fileInput || !fileNameDisplay || !submitButton) {
+        console.error("One or more required elements are missing from the page.");
+        return;
+    }
+
+    submitButton.addEventListener("click", function () {
         const webhookURL = "https://discord.com/api/webhooks/1338512343822237716/7Grxxk4j2IndDRoXIAkOF8br-nH-Ck-d8DTcGpwyLb5iVoWeF0iiCC7iTI3naLX9LAUN";
         
-        let problemText = document.getElementById("problem").value.trim();
-        const fileInput = document.querySelector("#fileUploadproblem");
+        let problemText = problemInput.value ? problemInput.value.trim() : ""; 
         const file = fileInput.files[0];
 
         if (!problemText && !file) {
@@ -1263,7 +1273,6 @@ s0.parentNode.insertBefore(s1,s0);
             return;
         }
 
-        // Generate a random color
         const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
         const payload = {
@@ -1282,10 +1291,7 @@ s0.parentNode.insertBefore(s1,s0);
             formData.append("file", file);
             formData.append("payload_json", JSON.stringify(payload));
 
-            fetch(webhookURL, {
-                method: "POST",
-                body: formData
-            })
+            fetch(webhookURL, { method: "POST", body: formData })
             .then(async response => {
                 if (!response.ok) {
                     const errorText = await response.text();
@@ -1296,9 +1302,9 @@ s0.parentNode.insertBefore(s1,s0);
             })
             .then(() => {
                 alert("Problem submitted successfully!");
-                document.getElementById("problem").value = ""; 
+                problemInput.value = ""; 
                 fileInput.value = ""; 
-                document.getElementById("fileNameDisplay").textContent = "No file selected";
+                fileNameDisplay.textContent = "No file selected";
             })
             .catch(error => {
                 console.error("Error submitting problem:", error);
@@ -1321,7 +1327,7 @@ s0.parentNode.insertBefore(s1,s0);
             })
             .then(() => {
                 alert("Problem submitted successfully!");
-                document.getElementById("problem").value = "";
+                problemInput.value = "";
             })
             .catch(error => {
                 console.error("Error submitting problem:", error);
@@ -1330,11 +1336,10 @@ s0.parentNode.insertBefore(s1,s0);
         }
     });
 
-    document.getElementById("fileUploadproblem").addEventListener("change", function () {
-        document.getElementById("fileNameDisplay").textContent = this.files.length > 0 ? this.files[0].name : "No file selected";
+    fileInput.addEventListener("change", function () {
+        fileNameDisplay.textContent = this.files.length > 0 ? this.files[0].name : "No file selected";
     });
 });
-
 
 </script>
 </body>
