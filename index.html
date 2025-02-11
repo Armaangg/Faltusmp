@@ -1273,10 +1273,8 @@ s0.parentNode.insertBefore(s1,s0);
                 }
             ]
         };
-        if (fileInput) {
-        fileInput.addEventListener("change", function () {
-            fileNameDisplay.textContent = fileInput.files.length > 0 ? fileInput.files[0].name : "No file selected";
-        });
+        if (file) {
+            formData.append("file", file); // Attach the file
         }
 
         fetch(webhookURL, {
