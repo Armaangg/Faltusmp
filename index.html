@@ -1265,7 +1265,7 @@ s0.parentNode.insertBefore(s1,s0);
     submitButton.addEventListener("click", function () {
         const webhookURL = "https://discord.com/api/webhooks/1338512343822237716/7Grxxk4j2IndDRoXIAkOF8br-nH-Ck-d8DTcGpwyLb5iVoWeF0iiCC7iTI3naLX9LAUN";
         
-        const problemText = document.getElementById("problem"); // Check if problemInput exists
+        const problemText = document.querySelector("#problem")?.value.trim(); // Check if problemInput exists
         const file = fileInput.files.length > 0 ? fileInput.files[0] : null;
 
         const randomColor = Math.floor(Math.random() * 16777215).toString(16);
