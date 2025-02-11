@@ -1264,16 +1264,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
-        const payload = {
-            embeds: [
+        
+            const embed = {
                 {
                     title: "New Problem Report",
                     color: parseInt(randomColor, 16),
                     fields: problemText ? [{ name: "PROBLEM", value: problemText, inline: true }] : [],
                     footer: { text: "Submitted via Problem Form" }
                 }
-            ]
-        };
+    };
+        
 
         if (file) {
             const formData = new FormData();
