@@ -30,6 +30,23 @@
     padding: 0 20px; 
     font-family: 'Orbitron',sans-serif;
 }
+ .animated-background {
+            position: fixed;
+            top: -300px;
+            left: -1500px;
+            width: 2500px;
+            height: 350%;
+            background: url('https://i.ibb.co/RkBvPnLK/IMG-20250212-093006.jpg') repeat;
+            background-size: 100px;
+            opacity: 0.2;
+            animation: moveBackground 10s linear infinite;
+            z-index: 0;
+            transform: rotate(50deg);
+        }
+        @keyframes moveBackground {
+            from { background-position: 0 0; }
+            to { background-position: 200px 100px; }
+        }
         .glow-heading {
             font-size: 28px;
             color: limegreen;
@@ -262,7 +279,7 @@
             margin-top: 10px;
             animation: fadeIn 0.5s ease-in-out;
             width: 330px;
-
+ z-index: 1;
             border-radius: 15px;
         }
 
@@ -330,6 +347,7 @@
     background-color: #333;
     color: #0cff00;
     border: 1px solid #0cff00;
+     z-index: 1;
 }
 
 .review-column .red-button {
@@ -349,11 +367,12 @@
 }
 li {
     font-size: 20px;
-    
+     z-index: 1;
 }
 p {
     font-family: 'Monomaniac One';sans-serif
     color: grey;
+     z-index: 1;
 }
 
 
@@ -443,7 +462,7 @@ p {
     border-radius: 20px;
     position: relative;
     left: 10px;
-    
+    z-index: 1;
 }
 
 .iframe-container iframe {
@@ -453,7 +472,7 @@ border-radius: 20px;
     left: -18px;
     width: 350px; /* Ensure iframe is large enough */
     height: 510px;
-     
+     z-index: 1;
      border: none;
     
 }
@@ -558,7 +577,7 @@ iframe {
     </style>
 </head>
 <body>
-
+<div class="animated-background"></div>
         <div class="hamburger" onclick="toggleMenu()">
         <div class="bar"></div>
         <div class="bar"></div>
