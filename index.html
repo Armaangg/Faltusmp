@@ -36,7 +36,7 @@
             left: -1500px;
             width: 2500px;
             height: 350%;
-            background: url('https://i.ibb.co/RkBvPnLK/IMG-20250212-093006.jpg') repeat;
+            background: url('https://i.ibb.co/Hf4x31Bg/20250212-101413.png') repeat;
             background-size: 100px;
             opacity: 0.2;
             animation: moveBackground 10s linear infinite;
@@ -620,6 +620,10 @@ iframe {
         <h2 class="glow-heading">Write your problem</h2>
 <div class="review-columns">
     <div class="review-column">
+        <label for="problemplayerGamertag">Write your Gamertag</label>
+          <textarea id="problemplayerGamertag" name="problem" rows="1" cols="40" required></textarea><br>
+          <label for="problemdc">Write your Discord Username (optional)</label>
+          <textarea id="problemdcid" name="problem" rows="1" cols="40" required></textarea><br>
         <label for="problemtext">Write your problem</label>
           <textarea id="problemtext" name="problem" rows="4" cols="40" required></textarea>
        <br>
@@ -627,8 +631,14 @@ iframe {
 <br>
         <input type="file" id="fileUploadproblem">
                 <p id="fileNameDisplay">No file selected</p><br>
-
-    <br>
+<h3>In which server you want to report the problem</h3>
+<label for="faltusmpreportradio">FALTUSMP</label>
+        <input type="radio" id="faltusmpreportradio" name="problemType" value="FaltuSMP">
+        <br>
+        <label for="faltulifestealreportradio">FALTU LIFESTEAL</label>
+        <input type="radio" id="faltulifestealreportradio" name="problemType" value="Faltu Lifesteal">
+        <br>
+    
          <button class="submit-button1" id="submitProblem">Submit Problem</button>
     </div>
 </div>
@@ -684,8 +694,13 @@ If pe/bedrock player mention   .  Before gamertag)</label><br>
                     placeholder="e.g. flying, hacking, xraying, duping, etc." required></textarea><br><br>
                     <input type="file" id="fileUpload">
                 <p id="fileNameDisplay">No file selected</p><br>
-                
-
+                <h3>In which server you want to report the player</h3>
+<label for="faltusmpreportradio">FALTUSMP</label>
+        <input type="radio" id="faltusmpreportradio" name="reportType" value="FaltuSMP">
+        <br>
+        <label for="faltulifestealreportradio">FALTU LIFESTEAL</label>
+        <input type="radio" id="faltulifestealreportradio" name="reportType" value="Faltu Lifesteal">
+        <br>
                 <button class="submit-button1" type="submit">Submit Report</button>
             </form>
         </div>
@@ -1150,8 +1165,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const playerGameUsername = document.querySelector("#playerGameUsername")?.value.trim() || "Not Provided";
         const gamertag = document.querySelector("#playerGamertag")?.value.trim();
         const infraction = document.querySelector("#playerInfraction")?.value.trim();
+        const selectedOption = document.querySelector('input[name="reportType"]:checked');
         const file = fileInput?.files[0];
-
+if (!selectedOption) {
+            alert("Please select an option before submitting.");
+            return;
+        }
         if (!gamertag || !infraction) {
             alert("Please fill out all required fields.");
             return;
@@ -1159,9 +1178,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Embed message
         const embed = {
+        
             title: "New Player Report",
             color: 16711680, // Red color
             fields: [
+        {    name: "Server", value: selectedOption.value, inline: true },
                 { name: "Reporter Player Gamertag", value: playerGameUsername, inline: true },
                 { name: "Discord Username", value: discordUsername, inline: true },
                 { name: "Player Gamertag", value: gamertag, inline: true },
@@ -1274,6 +1295,7 @@ s0.parentNode.insertBefore(s1,s0);
 document.addEventListener("DOMContentLoaded", function () {
     const submitButton = document.getElementById("submitProblem");
     const problemElement = document.getElementById("problemtext");
+    const problemElementus = document.getElementById("problemplayerGamertag");
     const fileInput = document.getElementById("fileUploadproblem");
 
     if (!submitButton || !problemElement || !fileInput) {
@@ -1283,12 +1305,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     submitButton.addEventListener("click", async function () {
         const webhookURL = "https://discord.com/api/webhooks/1338512343822237716/7Grxxk4j2IndDRoXIAkOF8br-nH-Ck-d8DTcGpwyLb5iVoWeF0iiCC7iTI3naLX9LAUN";
-        
+         const selectedOption = document.querySelector('input[name="problemType"]:checked');
+         const problemplayerGamertag = 
+         problemElementus.value ? problemElementus.value.trim() : "";
         const problemText = problemElement.value ? problemElement.value.trim() : "";
         const file = fileInput.files[0];
-
-        if (!problemText) {
-            alert("Please write your problem before submitting.");
+ const problemdiscord = document.getElementById("problemdcid")?.value.trim() || "Not Provided";
+        if (!problemText ||!problemplayerGamertag ) {
+            alert("Please write your problem and your gamertag before submitting.");
             return;
         }
 
@@ -1300,6 +1324,9 @@ document.addEventListener("DOMContentLoaded", function () {
             title: "New Problem Report",
             color: randomColor,
             fields: [
+            {    name: "Server", value: selectedOption.value, inline: true },
+                 { name: "Reporter Player Gamertag", value: problemplayerGamertag, inline: true },
+                 { name: "Discord Username", value: problemdiscord, inline: true },
                 {
                     name: "Problem",
                     value: problemText
