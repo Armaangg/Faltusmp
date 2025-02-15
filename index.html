@@ -11,36 +11,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Monomaniac+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-    <script>
-    if (window.innerWidth > 768) { // Adjust width as needed
-        window.location.href = "index-pc.html";
-    }
-    </script>
+    
     
     <style>
         body {
-    margin: 0;
+        width: auto;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
     font-family: Arial, sans-serif;
     background: black;
     color: grey;
-    text-align: left; 
+    text-align: center; 
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 0 20px; 
-    font-family: 'Orbitron',sans-serif;
+   
+   
+   
 }
  .animated-background {
             position: fixed;
             top: -300px;
-            left: -1500px;
-            width: 2500px;
-            height: 350%;
+            left: -4000px;
+            width: 10500px;
+            height: 950%;
             background: url('https://i.ibb.co/Hf4x31Bg/20250212-101413.png') repeat;
             background-size: 100px;
             opacity: 0.2;
             animation: moveBackground 10s linear infinite;
-            z-index: 0;
+            z-index: -1;
             transform: rotate(50deg);
         }
         @keyframes moveBackground {
@@ -74,6 +76,8 @@
             overflow: hidden;
             left: 60px;
             margin-bottom: 20px;
+            align-items: center;
+    justify-content: center;
         }
         .copyBtn2 {
             position: relative;
@@ -88,6 +92,8 @@
             overflow: hidden;
             left: 60px;
             margin-bottom: 20px;
+            align-items: center;
+    justify-content: center;
         }
 
         .clipboardIcon {
@@ -216,6 +222,8 @@
             padding: 10px;
             font-size: 26px;
             font-family: 'Amaranth', sans-serif;
+            text-align:left;
+            justify-content: left;
             z-index: 2000;
             font-weight: 700px;
             box-shadow: 0px 0px 30px black;
@@ -223,18 +231,19 @@
 .top-bar-text {
             position: fixed;
             top: 0;
-            left: 20;
+            left: 60px;
            
-            
             
             color: white;
-           
+            
+            
+            text-align:left;
+            justify-content: left;
             padding: 10px;
             font-size: 26px;
             font-family: 'Bangers', sans-serif;
             z-index: 1000;
             font-weight: 700px;
-            
 }
 .top-bar-text2 {
             position: fixed;
@@ -245,7 +254,8 @@
             color: white;
             
             
-            
+            text-align:left;
+            justify-content: left;
             padding: 10px;
             font-size: 26px;
             font-family: 'Bangers', sans-serif;
@@ -278,7 +288,9 @@
             padding: 20px;
             margin-top: 10px;
             animation: fadeIn 0.5s ease-in-out;
-            width: 330px;
+           
+    align-items: center;
+    justify-content: center;
  z-index: 1;
             border-radius: 15px;
         }
@@ -315,6 +327,8 @@
     flex-direction: column;
     gap: 20px;
     align-items: center; /* Center them horizontally */
+    align-items: center;
+    justify-content: center;
 }
 
 .review-column {
@@ -322,6 +336,8 @@
     border: 1px solid #0cff00;
     padding: 20px;
     border-radius: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .review-column h3 {
@@ -461,19 +477,23 @@ p {
     overflow: hidden; /* Crops the iframe */
     border-radius: 20px;
     position: relative;
-    left: 10px;
-    z-index: 1;
+    
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
 }
 
 .iframe-container iframe {
 border-radius: 20px;
-    position: absolute;
+    
     top: -320px; /* Moves it up but keeps it cropped */
-    left: -18px;
+   
     width: 350px; /* Ensure iframe is large enough */
     height: 510px;
-     z-index: 1;
+     z-index: 2;
      border: none;
+     align-items: center;
+    justify-content: center;
     
 }
 .motd {
@@ -483,9 +503,14 @@ border-radius: 20px;
     font-family: Arial, sans-serif !important;
     color: white;
     top: 100px;
+    align-items: center;
+    justify-content: center;
 }
 iframe {
     top: 100px;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
 }
 .server-card {
     background-color: #23272a;
@@ -497,6 +522,8 @@ iframe {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     right: 30px;
     position: absolute;
+    align-items: center;
+    justify-content: center;
 }
 .server-logo {
     width: 80px;
@@ -511,6 +538,8 @@ iframe {
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
+    align-items: center;
+    justify-content: center;
     font-weight: bold;
 }
 
@@ -536,6 +565,8 @@ iframe {
             border-radius: 25px;
             z-index: 1000;
             transition: box-shadow 0.3s ease, transform 0.3s ease;
+            align-items: center;
+    justify-content: center;
             
         }
         .submit-button:hover {
@@ -554,6 +585,8 @@ iframe {
             border-radius: 25px;
             z-index: 1000;
             transition: box-shadow 0.3s ease, transform 0.3s ease;
+            align-items: center;
+    justify-content: center;
             
         }
         .submit-button1:hover {
@@ -591,10 +624,131 @@ iframe {
             font-weight: 800;
             margin: 20px 0 10px;
         }
+      
+/* Base text settings */
+body {
+    font-size: 1rem;
+    max-width: 90%;
+    margin: auto;
+    text-align: justify;
+}
+
+/* Tablets (768px and up) - Text gets slightly bigger and wider */
+@media (min-width: 768px) {
+    body {
+        font-size: 1.2rem;
+        max-width: 85%;
+    }
+   .copyBtn, .copyBtn2 {
+    position: relative; /* or absolute */
+    left: 200px;
+}
+.faltusmplogo {
+position: relative;
+    left: 150px;
+}
+
+}
+
+/* Small Desktops (1024px and up) - Text gets wider and slightly larger */
+@media (min-width: 1024px) {
+    body {
+        font-size: 1.4rem;
+        max-width: 80%;
+    }
+    .copyBtn, .copyBtn2 {
+    position: relative; /* or absolute */
+    left: 240px;
+}
+.faltusmplogo {
+position: relative;
+    left: 180px;
+}
+
+}
+
+/* Large Desktops (1440px and up) - Text extends further */
+@media (min-width: 1440px) {
+    body {
+        font-size: 1.6rem;
+        max-width: 75%;
+    }
+    .copyBtn, .copyBtn2 {
+    position: relative; /* or absolute */
+    left: 340px;
+}
+.faltusmplogo {
+position: relative;
+    left: 270px;
+}
+}
+
+/* 4K Screens (2560px and up) - Text is at its widest and largest */
+@media (min-width: 2560px) {
+    body {
+        font-size: 2rem;
+        max-width: 70%;
+    }
+    .copyBtn, .copyBtn2 {
+    position: relative; /* or absolute */
+    left: 440px;
+}
+.faltusmplogo {
+position: relative;
+    left: 370px;
+}
+}
+
+/* 8K Screens (7680px and up) - Text begins to reduce width */
+@media (min-width: 7680px) {
+    body {
+        font-size: 2.2rem;
+        max-width: 75%;
+    }
+    .copyBtn, .copyBtn2 {
+    position: relative; /* or absolute */
+    left: 540px;
+}
+.faltusmplogo {
+position: relative;
+    left: 470px;
+}
+}
+
+/* 16K Screens (15360px and up) - Text is unwide again */
+@media (min-width: 15360px) {
+    body {
+        font-size: 2.5rem;
+        max-width: 80%;
+    }
+    .copyBtn, .copyBtn2 {
+    position: relative; /* or absolute */
+    left: 640px;
+}
+.faltusmplogo {
+position: relative;
+    left: 570px;
+}
+}
+#home p {
+    max-width: none;  /* Allow it to extend fully */
+    width: 100%;      /* Stretch to full width */
+    white-space: normal; /* Ensure text wraps properly */
+}
+.centered {
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+.btncenter {
+    align-items: center;
+    justify-content: center;
+}
 
     </style>
 </head>
 <body>
+   
 <div class="animated-background"></div>
         <div class="hamburger" onclick="toggleMenu()">
         <div class="bar"></div>
@@ -652,12 +806,15 @@ iframe {
          <br><br>
         <img src="https://i.ibb.co/0RJnbfV4/319c8c7d7be4ed5f4bd020baebda7470.png" alt="Image" class="rounded-image">
          <h1 class="teamname">MR ROMEO MC</h1>
-         <h1 class="teamrole">MODERATOR</h1>
+         <h1 class="teamrole"> DISCORD SERVER MANAGEMENT</h1>
            <br><br>
         <img src="https://i.ibb.co/9kGh1pb9/913461f6d2b34d48d7d170baa00f41da.png" alt="Image" class="rounded-image">
          <h1 class="teamname">HARSH</h1>
-         <h1 class="teamrole">MODERATOR</h1>
-           
+         <h1 class="teamrole">MODERATORS/HELPER</h1>
+           <br><br>
+        <img src="https://i.ibb.co/8DMdT4wW/9be75df43c050a369d2f0840c5d9dd6f.png" alt="Image" class="rounded-image">
+         <h1 class="teamname">HARDIK</h1>
+         <h1 class="teamrole">MODERATORS/HELPER</h1>
          <br><br>
         <img src="https://i.ibb.co/nTfRqsn/908adf9da5ff669f161fea0b635e97f0.png" alt="Image" class="rounded-image">
          <h1 class="teamname">AK GAMING YT</h1>
@@ -772,7 +929,7 @@ If pe/bedrock player mention   .  Before gamertag)</label><br>
    <br><br>
       <img src="https://i.ibb.co/PvwngFs6/standard-4.gif" alt="FALTU SMP LOGO" class="faltusmplogo">
         <br><br>
-
+<div class="btncenter">
         <button class="copyBtn" onclick="copyToClipboard('survival.faltusmp.fun:25599', this)">
             <img class="clipboardIcon" src="https://i.ibb.co/fz8Bc40B/clipboard.png" alt="Clipboard Icon">
             <span class="copyText">Click to copy <br>faltusmp ip</span>
@@ -801,6 +958,7 @@ If pe/bedrock player mention   .  Before gamertag)</label><br>
                 <span>C</span><span>o</span><span>p</span><span>i</span><span>e</span><span>d</span>
             </span>
         </button>
+        </div>
         </section>
         <section id="status" class="tab-content">
            . ....................................<br><br><br>
@@ -991,6 +1149,7 @@ If pe/bedrock player mention   .  Before gamertag)</label><br>
             </p>
     </section>
     
+  
 <a href="#" id="scrollDownBtn">&#9660;</a>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
